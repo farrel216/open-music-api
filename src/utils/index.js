@@ -27,4 +27,32 @@ const mapAlbumDBToModel = (albums, songs) => ({
   })),
 });
 
-module.exports = { mapDBToModel, mapAlbumDBToModel };
+const mapPlaylistSongDBToModel = (playlist, songs) => ({
+  playlist: {
+    id: playlist.id,
+    name: playlist.name,
+    username: playlist.username,
+    songs: songs.map((song) => ({
+      id: song.id,
+      title: song.title,
+      performer: song.performer,
+    })),
+  },
+});
+
+const mapPlaylistActivityDBToModel = (playlistId, activities) => ({
+  playlistId,
+  activities: activities.map((activity) => ({
+    username: activity.username,
+    title: activity.title,
+    action: activity.action,
+    time: activity.time,
+  })),
+});
+
+module.exports = {
+  mapDBToModel,
+  mapAlbumDBToModel,
+  mapPlaylistSongDBToModel,
+  mapPlaylistActivityDBToModel,
+};
